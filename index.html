@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff0f6">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="SOO RADAR · 실제 Alpaca IEX 관찰 이력 및 검증된 분봉 연구 결과">
+  <title>SOO RADAR ♡ | 실제 나스닥 연구 레이더</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+ <div class="shell" id="top">
+  <header class="topbar">
+   <a href="#top" class="brand" aria-label="SOO RADAR 홈">
+    <span class="kitty-mark" aria-hidden="true">🐱<span>🎀</span></span>
+    <span class="brand-text"><strong>SOO <em>RADAR</em><i>♡</i></strong><small>MY PINK NASDAQ RESEARCH SPACE</small></span>
+   </a>
+   <div class="market-scope"><span class="scope-dot"></span> NASDAQ · Alpaca IEX 관측 기록</div>
+   <div class="connection-group"><span id="connection-dot" class="status-dot"></span><span id="connection">데이터 확인 중</span><button id="refresh" type="button" title="저장된 보고서 다시 확인" aria-label="새로 확인">↻</button></div>
+  </header>
+  <nav class="tabs" aria-label="실제 확인 가능한 데이터 메뉴">
+   <a href="#top" class="active">⌂ <span>레이더 홈</span></a>
+   <a href="#research">♡ <span>연구 후보</span></a>
+   <a href="#history">▤ <span>관찰 이력</span></a>
+   <a href="#detail">⌁ <span>실제 체결가</span></a>
+   <a href="#run-panel">✓ <span>실행 검증</span></a>
+  </nav>
+  <main>
+   <section class="hero">
+    <div class="hero-copy">
+     <div class="eyebrow">✦ SOO'S LITTLE STOCK LAB ✦</div>
+     <h1>오늘의 움직임도,<br><em>예쁘고 정확하게</em> 살펴봐 ♡</h1>
+     <p>실제 수집한 나스닥 일부 종목의 거래량 가속·저점 상승·고가권 압축을 연구하는 핑크빛 관찰 레이더</p>
+    </div>
+    <div class="last-card">
+     <div class="last-kicker">♡ 마지막 검증된 시세 관측</div>
+     <strong id="last-observed">실제 기록 대기</strong>
+     <span id="last-relative">원장 검증 전</span>
+     <span id="old-data" class="age-tag">과거 관찰 · 현재가 아님</span>
+    </div>
+   </section>
+   <section class="disclaimer" role="note">
+    <span class="disclaimer-icon">♡</span>
+    <div><strong>실제 확인된 데이터 메뉴만 보여줘요.</strong><p>예시 주가·가짜 종목 없음 · 일부 IEX 표본의 과거 관측 · 전체 나스닥 실시간 순위 / 세력 매집 확정 / 매수 신호 아님</p></div>
+    <span class="disclaimer-flag">REAL RECORDS ONLY</span>
+   </section>
+   <section class="stats" aria-label="이번 실제 실행의 검증된 통계">
+    <article class="stat"><span class="stat-icon">⌕</span><span class="stat-label">이번 회차 IEX 수신</span><strong id="snapshots">—</strong><small>실제 스냅샷 수</small></article>
+    <article class="stat"><span class="stat-icon">♡</span><span class="stat-label">$0.50–$5 가격 관측</span><strong id="price-matches">—</strong><small>이번 회차 가격 조건</small></article>
+    <article class="stat"><span class="stat-icon">▥</span><span class="stat-label">분봉 정밀 연구</span><strong id="technical">—</strong><small>실제 연구 완료/관측 기록</small></article>
+    <article class="stat highlight"><span class="stat-icon">✧</span><span class="stat-label">3조건 동시 관찰</span><strong id="triple-count">—</strong><small>이번 회차 연구용 후보</small></article>
+   </section>
+   <div class="flow-heading"><strong>♡ 이번 실행의 검증 흐름</strong><span>일부 표본만 검사 · 전시장 탐색 주장 아님</span></div>
+   <section class="pipeline" aria-label="관측 단계별 실제 조사 건수">
+    <div class="pipe"><small>01 · SAMPLE</small><strong>순환 종목 요청</strong><span id="flow-scanned">—</span></div><b class="flow-arrow">›</b>
+    <div class="pipe"><small>02 · PRICE</small><strong>가격 관측</strong><span id="flow-priced">—</span></div><b class="flow-arrow">›</b>
+    <div class="pipe"><small>03 · MINUTE BARS</small><strong>분봉 정밀 연구</strong><span id="flow-tech">—</span></div><b class="flow-arrow">›</b>
+    <div class="pipe pipe-accent"><small>04 · RESEARCH</small><strong>3조건 연구 후보</strong><span id="flow-ready">—</span></div>
+   </section>
+
+   <div class="main-columns">
+    <section id="research" class="panel research-panel">
+     <div class="panel-head"><div><div class="eyebrow">✦ 01 · VERIFIED RESEARCH WATCH</div><h2>3조건 동시 관찰 <em>연구 후보</em></h2><p>거래량 가속 · 저점 상승 · 고가권 압축이 실제 분봉에서 함께 확인된 경우에만 기록</p></div><span class="badge">이번 실행 한정</span></div>
+     <div class="table-holder"><table class="candidate-table" aria-label="3조건 실제 관찰 연구 후보 표">
+      <thead><tr><th>티커</th><th>IEX 15분 상대거래량</th><th>거래량 가속</th><th>저점 상승</th><th>고가권 압축</th><th>관찰가</th></tr></thead>
+      <tbody id="candidate-list"><tr><td colspan="6" class="placeholder-cell">♡ 실제 연구 결과를 확인 중이에요.</td></tr></tbody>
+     </table></div>
+     <p class="footnote">※ IEX 피드만의 제한된 연구 결과예요. 전체 나스닥 TOP10, 매집 확정이나 매수 추천은 아니에요.</p>
+    </section>
+
+    <aside class="panel detail-panel" id="detail">
+     <div class="panel-head"><div><div class="eyebrow">♡ 02 · DISTINCT ACTUAL TRADES</div><h2>선택 종목 <em>가격 관찰</em></h2><p>서로 다른 실제 체결시각의 저장된 가격만 연결</p></div></div>
+     <div class="detail-header"><strong id="detail-symbol">종목 미선택</strong><span id="detail-label" class="badge">기록 대기</span></div>
+     <div id="detail-price" class="detail-price">기록된 가격 없음</div>
+     <p id="detail-time" class="detail-time">실제 기록이 생기면 표시해요.</p>
+     <div class="chart-wrap">
+      <svg id="detail-chart" viewBox="0 0 360 140" role="img" aria-label="실제 고유 체결시각별 기록 가격의 점 관찰 차트">
+       <defs><linearGradient id="pinkFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f15196" stop-opacity=".25"></stop><stop offset="1" stop-color="#f15196" stop-opacity="0"></stop></linearGradient></defs>
+       <path id="chart-fill" d="" fill="url(#pinkFill)"></path><path id="chart-line" d="" fill="none" stroke="#ec4c91" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+      <div id="chart-empty" class="chart-empty">♡<small>실제 체결 시각 2개 이상이 모이면<br>가격 관찰 그래프가 표시돼요.</small></div>
+     </div>
+     <div class="chart-foot">실시간 캔들 차트 아님 · 실제 체결 사이 움직임은 확인되지 않음</div>
+     <div class="signal-title">♡ 마지막 분봉 조건 관찰</div>
+     <div class="signal"><span>거래량 가속</span><strong id="sig-volume">미검증</strong></div>
+     <div class="signal"><span>저점 상승</span><strong id="sig-lows">미검증</strong></div>
+     <div class="signal"><span>고가권 압축</span><strong id="sig-compress">미검증</strong></div>
+     <p class="fineprint">기록 시점 기준의 연구 관측이며 현재 주가·미래 상승·세력 매집을 입증하지 않습니다.</p>
+    </aside>
+   </div>
+
+   <section id="history" class="panel history-panel">
+    <div class="panel-head"><div><div class="eyebrow">♡ 03 · ACTUAL OBSERVATION HISTORY</div><h2>실제로 살펴본 <em>종목들</em></h2><p>저장된 관찰 종목 최대 50개 · 실제 현재가가 아닌 마지막 기록가</p></div>
+     <div class="filters"><label class="sr-only" for="search">티커 검색</label><input id="search" type="search" placeholder="⌕ 티커 검색" maxlength="18"><label class="sr-only" for="filter">조건 필터</label><select id="filter"><option value="all">전체 기록</option><option value="triple">과거 3조건 관찰</option><option value="fresh">수집 당시 신선</option></select></div>
+    </div>
+    <div class="table-holder"><table><thead><tr><th>티커</th><th>마지막 기록가</th><th>가격 관측 횟수</th><th>수집 당시 상태</th><th>분봉 3조건</th><th>마지막 조사(한국시간)</th></tr></thead><tbody id="history-rows"><tr><td colspan="6" class="placeholder-cell">♡ 실제 저장된 종목 이력 확인 중</td></tr></tbody></table></div>
+    <p id="row-count" class="table-footer">미검증 종목은 표시하지 않아요.</p>
+   </section>
+
+   <section class="bottom-cards">
+    <section class="panel repeat-panel" aria-labelledby="repeat-heading">
+     <div class="eyebrow">♡ 04 · REPEATED OBSERVATIONS</div><h2 id="repeat-heading">두 번 이상 <em>가격 관찰한 종목</em></h2>
+     <p>저장된 관측 횟수로만 구분한 기록이에요. 관심 종목이나 매집 후보라고 추정하지 않아요.</p>
+     <div id="repeat-list" class="repeat-list"><div class="repeat-empty">실제 반복 관찰 기록을 기다리고 있어요.</div></div>
+    </section>
+    <section id="run-panel" class="panel run-panel">
+     <div class="eyebrow">♡ 05 · RUN & NOTIFICATION STATUS</div><h2>실제 실행 <em>검증 현황</em></h2>
+     <p id="run-info" class="run-info">검증된 GitHub 실행 기록을 기다려요.</p>
+     <a id="run-link" class="run-link" href="https://github.com/mar26mar/NASDAQ7-CHINA1-RADAR/actions/workflows/step8-main-market-schedule.yml" target="_blank" rel="noopener noreferrer">GitHub 원본 실행 기록 확인 ↗</a>
+     <div class="run-notice"><strong>♡ 휴대폰 연구 알림</strong><span>텔레그램 수신 설정이 확인되지 않은 경우 발송되지 않습니다. 화면은 휴대폰 푸시 수신 여부를 검증하지 않아요.</span></div>
+     <div class="run-notice"><strong>♡ SEC 공시 확인</strong><span>제출서류 조회 기능은 별도로 있지만, 이 페이지에서는 희석 위험이 없다는 판단을 표시하지 않아요.</span></div>
+    </section>
+   </section>
+  </main>
+  <footer><strong>♡ SOO RADAR</strong><span>실제 기록 데이터 생성: <span id="generated">미확인</span> · 열린 페이지에서 60초마다 저장된 파일 확인 · 실시간 스트리밍 아님</span></footer>
+ </div>
+</body>
+</html>
