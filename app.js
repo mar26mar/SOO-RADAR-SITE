@@ -192,6 +192,7 @@ function render(data){
   put('connection','검증된 보고서 파일 읽음');
   $('connection-dot').className='status-dot good';
   renderCards(data.research_candidates_this_run);
+  renderObservedOverview(data);
   renderHistory(data.historical_observations);
   renderRepeated(data.historical_observations);
   if(selected&&rowFind(selected))selectRow(selected);
@@ -235,3 +236,50 @@ $('refresh').addEventListener('click',load);
 load();
 setInterval(()=>{if(document.visibilityState==='visible')load();},60000);
 setInterval(()=>{if(latest)put('last-relative',ageText(latest.observation_utc));},30000);
+
+// Verified observations, not trading signals or real-time prices.
+function renderObservedOverview(data) {
+  const anchor = document.querySelector('.main-columns');
+  if (!anchor) throw new Error('Observed-list placement unavailable');
+  let panel = document.getElementById('observed-overview');
+  if (!panel) {
+    panel = make('section', undefined, 'panel');
+    panel.id = 'observed-overview';
+    anchor.before(panel);
+  }
+  panel.replaceChildren();
+  const h = make('h2', '♡ 이번 회차 관측 종목 · 신호와 별개');
+  const note = make('p', '실제 수집된 가격 기록만 표시합니다. 실시간 시세·매집 확인·매수 신호가 아닙니다.');
+  const observedAt = new Date(data.observation_utc).getTime();
+  const rows = data.historical_observations
+    .filter(x => Number.isFinite(new Date(x.last_checked_utc).getTime()) &&
+      Math.abs(new Date(x.last_checked_utc).getTime() - observedAt) <= 120000)
+    .sort((a,b) => a.ticker.localeCompare(b.ticker));
+  const count = make('p', '이번 회차 가격 관찰: ' + rows.length + '개 · 최종 3조건 후보: ' +
+    data.three_conditions_observed_this_run + '개');
+  panel.append(h, note, count);
+  const holder = make('div', undefined, 'table-holder');
+  const table = make('table');
+  const head = make('thead'), headRow = make('tr');
+  ['종목', '기록가 (USD)', '분봉 검증 상태', '관찰 시각 (KST)'].forEach(label =>
+    headRow.append(make('th',label)));
+  head.append(headRow);
+  const body = make('tbody');
+  if (!rows.length) {
+    const tr = make('tr'), td = make('td', '이번 회차 가격 관찰 종목이 없습니다.');
+    td.colSpan = 4; tr.append(td); body.append(tr);
+  }
+  for (const item of rows.slice(0,25)) {
+    const tr = make('tr');
+    const cell = make('td');
+    const btn = make('button', item.ticker, 'ticker-btn');
+    btn.type='button';
+    btn.addEventListener('click',()=>selectRow(item.ticker));
+    cell.append(btn);tr.append(cell);
+    tr.append(make('td',dollar(item.last_recorded_price_usd)));
+    tr.append(make('td',String(item.research_status || '미검증') + ' · 신호 아님'));
+    tr.append(make('td',koTime(item.last_checked_utc)));
+    body.append(tr);
+  }
+  table.append(head,body);holder.append(table);panel.append(holder);
+}
